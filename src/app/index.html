@@ -7,12 +7,17 @@
     <!-- endinject -->
     <!-- inject:css -->
     <link rel="stylesheet" href="/css/app.css">
+    <link rel="stylesheet" href="/css/styles/colours.css">
+    <link rel="stylesheet" href="/css/styles/meyerReset.css">
+    <link rel="stylesheet" href="/css/styles/studio/furniture/studioHeader.css">
+    <link rel="stylesheet" href="/css/styles/studio/furniture/studioSidebar.css">
+    <link rel="stylesheet" href="/css/styles/studio/furniture/uiViewContainer.css">
     <!-- endinject -->
   </head>
   <body>
-    <h1>wirewaxStudio</h1>
-    <h2>Your new AngularJS app is now ready...</h2>
-    <ng-view></ng-view>
+
+    <ui-view></ui-view>
+
     <!-- inject:vendor:js -->
     <script src="/angular/angular.js"></script>
     <script src="/angular-route/angular-route.js"></script>
@@ -20,6 +25,7 @@
     <!-- endinject -->
     <!-- inject:js -->
     <script src="/app.js"></script>
+    <script src="/wirewax-studio-templates.js"></script>
     <!-- endinject -->
   </body>
 </html>
