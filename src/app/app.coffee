@@ -1,3 +1,4 @@
-angular.module('wirewaxStudio', [
-  'ngRoute'
-])
+angular.module 'wirewaxStudio', [
+    'ngRoute'
+    'ui.router'
+]
