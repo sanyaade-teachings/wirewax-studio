@@ -1,8 +1,12 @@
 'use strict';
 
 
-VideosController = ($scope, ApiService) ->
-    console.log(ApiService.getData())
+VideosController = (AuthenticationService) ->
+
+    AuthenticationService.authenticateUser(
+        username: 'twig2let'
+        password: 'Tw1g2l3t!'
+    )
 
 angular.module 'videos.controllers'
 .controller 'VideosController', VideosController
