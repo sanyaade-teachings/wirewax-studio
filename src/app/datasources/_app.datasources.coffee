@@ -1,3 +1,5 @@
 'use strict';
 
-angular.module 'app.dataSources', []
+angular.module 'app.dataSources', [
+    'app.models'
+]

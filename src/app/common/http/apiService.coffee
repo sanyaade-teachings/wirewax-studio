@@ -2,7 +2,7 @@
 
 
 ApiService = ($http, wirewaxConstants) ->
-    base_url = wirewaxConstants.api_url
+    BASE_URL = wirewaxConstants.api_url
 
     getAccessToken: (data) ->
         options =
@@ -15,8 +15,28 @@ ApiService = ($http, wirewaxConstants) ->
                 username: data.username
                 password: data.password
 
-        return $http.post(base_url + options.url, options.data);
+        return $http.post(BASE_URL + options.url, options.data);
 
+    refreshAccessToken: (data) ->
+        options =
+            method: 'POST'
+            url: 'access_token'
+            data:
+                grant_type: 'refresh_token'
+                refresh_token: data.refresh_token
+                client_id: wirewaxConstants.client_id
+                client_secret: wirewaxConstants.client_secret
+
+        return $http.post(BASE_URL + options.url, options.data);
+
+
+    getVideoData: ->
+        options =
+            method: 'GET'
+            url: 'videos'
+            data: null
+
+        return $http.get(BASE_URL + options.url, options.data);
 
 angular.module 'wirewaxStudio'
 .factory 'ApiService', ApiService

@@ -1,13 +1,29 @@
 'use strict';
 
-BaseDataSource = ($log)->
+BaseDataSource = (ApiService) ->
     class BaseDataSource
-        constructor: (@options) ->
-            @collection = @options.arr
-            @name = @options.name
+        constructor: (options) ->
+            @name = options.name
 
-        say: ->
-            alert @name;
+            @model = options.model
+            @collection = []
+
+            @inError = false
+
+            @initialise()
+
+        initialise: ->
+            ApiService.getVideoData()
+            .success @_createItems
+            .error @_error
+
+        _createItems: (data) =>
+            @collection.push new @model(data)
+
+        _error: (data) =>
+            @collection.push new @model()
+            @error = true
+            console.error data
 
 angular.module 'app.dataSources'
 .factory 'BaseDataSource', BaseDataSource

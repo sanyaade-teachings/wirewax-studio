@@ -1,13 +1,12 @@
 'use strict';
 
-VideosDataSource = (BaseDataSource) ->
+VideosDataSource = (VideoModel, BaseDataSource) ->
     class VideosDataSource extends BaseDataSource
         constructor: ->
             options =
-                arr: [1, 2, 3]
-                name: 'Videos DataSource'
+                name: 'VIDEOS_DATA_SOURCE'
+                model: VideoModel
             super(options)
-            console.log 'VideosDataSource Init...'
 
     new VideosDataSource()
 
