@@ -1,6 +1,6 @@
 'use strict';
 
-VideoModel = (BaseDataSource) ->
+VideoModel = () ->
     class VideoModel
         constructor: (options)->
             @name = 'Video Model'

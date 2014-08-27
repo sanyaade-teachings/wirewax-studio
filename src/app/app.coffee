@@ -6,6 +6,8 @@ angular.module 'wirewaxStudio', [
     'projects.module'
 ]
 
+
+#       Add States(Routes)
 .config ($stateProvider, $urlRouterProvider) ->
     $urlRouterProvider.otherwise("/studio");
 
@@ -15,11 +17,18 @@ angular.module 'wirewaxStudio', [
         templateUrl: 'templates/studio/furniture/studioCore.html'
         controller: 'VideosController'
     .state "projects",
-        url: '/projects'
-        templateUrl: 'templates/studio/furniture/studioCore.html'
-        controller: 'ProjectsController'
+      url: '/projects'
+      templateUrl: 'templates/studio/furniture/studioCore.html'
+      controller: 'ProjectsController'
 
-.constant 'wirewaxConstants',
+
+
+#       Add the HTTP Interceptor
+.config ($httpProvider) ->
+    $httpProvider.interceptors.push "HttpInterceptor"
+
+
+.constant 'WirewaxConstants',
     api_url: 'http://api.wirewax.com/api/'
     root: '/'
     client_id: 1
@@ -27,7 +36,7 @@ angular.module 'wirewaxStudio', [
     cloud_front_url: '//d2zqckv5bq8ab.cloudfront.net/'
     cdnUrl: '//devf4pjng0kk0.cloudfront.net/'
 
-    uploadCDNUrl: '//d3chrq2sclixg2.cloudfront.net/'
-    uploadCDNFolder: 'encode-input/'
-    uploadCDNPolicy: 'ICAJCXsiZXhwaXJhdGlvbiI6ICIyMDUwLTAxLTAxVDAwOjAwOjAwWiIsDQogICJjb25kaXRpb25zIjogWyANCiAgICB7ImJ1Y2tldCI6ICJ3aXJld2F4LXVwbG9hZHMifSwgDQogICAgWyJzdGFydHMtd2l0aCIsICIka2V5IiwgImVuY29kZS1pbnB1dHMvIl0sDQogICAgeyJhY2wiOiAicHVibGljLXJlYWQifQ0KICBdDQp9'
-    uploadCDNID: 'd3chrq2sclixg2'
+    upload_cdn_url: '//d3chrq2sclixg2.cloudfront.net/'
+    upload_cdn_folder: 'encode-input/'
+    upload_cdn_policy: 'ICAJCXsiZXhwaXJhdGlvbiI6ICIyMDUwLTAxLTAxVDAwOjAwOjAwWiIsDQogICJjb25kaXRpb25zIjogWyANCiAgICB7ImJ1Y2tldCI6ICJ3aXJld2F4LXVwbG9hZHMifSwgDQogICAgWyJzdGFydHMtd2l0aCIsICIka2V5IiwgImVuY29kZS1pbnB1dHMvIl0sDQogICAgeyJhY2wiOiAicHVibGljLXJlYWQifQ0KICBdDQp9'
+    upload_cdn_id: 'd3chrq2sclixg2'
