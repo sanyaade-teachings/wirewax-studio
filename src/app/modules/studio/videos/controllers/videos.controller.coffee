@@ -1,12 +1,14 @@
 'use strict';
 
 
-VideosController = ($scope, AuthenticationService, VideosDataSource) ->
+VideosController = ($scope, $log, VideosDataSource, AuthenticationService, UserSession) ->
 
 #    AuthenticationService.authenticateUser(
-#        username: 'twig2let'
-#        password: 'Tw1g2l3t!'
-#    )
+#            username: 'twig2let'
+#            password: 'Tw1g2l3t!'
+#        ).success (data) ->
+#            $log.debug 'authenticated user'
+#            UserSession.create(data)
 
 
 angular.module 'videos.controllers'

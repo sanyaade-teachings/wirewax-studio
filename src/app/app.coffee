@@ -7,7 +7,7 @@ angular.module 'wirewaxStudio', [
 ]
 
 
-#       Add States(Routes)
+#       Add states(routes)
 .config ($stateProvider, $urlRouterProvider) ->
     $urlRouterProvider.otherwise("/studio");
 
@@ -17,24 +17,36 @@ angular.module 'wirewaxStudio', [
         templateUrl: 'templates/studio/furniture/studioCore.html'
         controller: 'VideosController'
     .state "projects",
-      url: '/projects'
-      templateUrl: 'templates/studio/furniture/studioCore.html'
-      controller: 'ProjectsController'
+        url: '/projects'
+        templateUrl: 'templates/studio/furniture/studioCore.html'
+        controller: 'ProjectsController'
 
 
+.constant 'AUTH_EVENTS',
+    login_success: 'auth-login-success',
+    login_ailed: 'auth-login-failed',
+    logout_success: 'auth-logout-success',
+    session_timeout: 'auth-session-timeout',
+    not_authenticated: 'auth-not-authenticated',
+    not_authorized: 'auth-not-authorized'
 
-#       Add the HTTP Interceptor
+.constant 'USER_ROLES',
+    all: '*',
+    admin: 'admin'
+
+#       Add the HTTP interceptor
 .config ($httpProvider) ->
     $httpProvider.interceptors.push "HttpInterceptor"
 
 
-.constant 'WirewaxConstants',
+#       Declare app wide constants
+.constant 'WIREWAX_CONFIG',
     api_url: 'http://api.wirewax.com/api/'
     root: '/'
     client_id: 1
     client_secret: 'WgDuxKpzmMLhX0TMAnWE3qhmVMTe6aL1'
     cloud_front_url: '//d2zqckv5bq8ab.cloudfront.net/'
-    cdnUrl: '//devf4pjng0kk0.cloudfront.net/'
+    cdn_url: '//devf4pjng0kk0.cloudfront.net/'
 
     upload_cdn_url: '//d3chrq2sclixg2.cloudfront.net/'
     upload_cdn_folder: 'encode-input/'

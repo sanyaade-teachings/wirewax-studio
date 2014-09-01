@@ -8,6 +8,9 @@ VideosDataSource = (VideoModel, BaseDataSource) ->
                 model: VideoModel
             super(options)
 
+        initialise: ->
+            console.log 'request video data'
+
     new VideosDataSource()
 
 angular.module 'app.dataSources'

@@ -1,13 +1,11 @@
 'use strict';
 
-HttpHeadersService = ($log, AuthenticationService) ->
-    set: (req) ->
-        @_addTokenHeader(req) if req.secure is true
-
-        req
+HttpHeadersService = (UserSession) ->
+    set: (request) ->
+        @_addTokenHeader(request) if request.secure is true
 
     _addTokenHeader: (req) ->
-        req.headers['Authorization'] = 'Bearer ' + AuthenticationService.getAccessToken()
+        req.headers['Authorization'] = 'Bearer ' + UserSession.getAccessToken()
 
 
 angular.module 'http.services'

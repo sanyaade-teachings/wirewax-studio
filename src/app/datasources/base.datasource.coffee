@@ -12,11 +12,6 @@ BaseDataSource = (ApiService) ->
 
             @initialise()
 
-        initialise: ->
-            ApiService.getVideoData()
-            .success @_createItems
-            .error @_error
-
         _createItems: (data) =>
             @collection.push new @model(data)
 
