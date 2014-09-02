@@ -13,5 +13,5 @@ ApiService = ($http, WIREWAX_CONFIG) ->
 
         return $http.get(BASE_URL + options.url, options.data);
 
-angular.module 'wirewaxStudio'
+angular.module 'app.api'
 .factory 'ApiService', ApiService

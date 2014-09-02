@@ -5,6 +5,7 @@ UserSession = ($cookieStore, $log, TokenApi) ->
         $cookieStore.put 'wirewax', data
 
     destroy: ->
+        $cookieStore.remove 'wirewax'
 
     isAuthenticated: ->
         cookie = $cookieStore.get("wirewax")
@@ -23,6 +24,8 @@ UserSession = ($cookieStore, $log, TokenApi) ->
     getAccessToken: ->
         $cookieStore.get("wirewax").access_token
 
+    getFacebookData: ->
+
     _refreshAccessToken: ->
         promise = TokenApi.refreshAccessToken($cookieStore.get "wirewax")
         promise.success (data) ->
@@ -34,5 +37,5 @@ UserSession = ($cookieStore, $log, TokenApi) ->
     _hasRefreshToken: (cookie) ->
         cookie.refresh_token
 
-angular.module 'wirewaxStudio'
+angular.module 'app.user'
 .service 'UserSession', UserSession

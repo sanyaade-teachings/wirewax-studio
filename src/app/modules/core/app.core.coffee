@@ -4,6 +4,9 @@ angular.module 'app.core', [
     'ui.router'
     'ngCookies'
 
-    'http.services'
+    'app.constants'
     'app.dataSources'
+    'app.user'
+    'app.http'
+    'app.api'
 ]

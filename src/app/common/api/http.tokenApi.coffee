@@ -33,5 +33,5 @@ TokenApi = ($injector, WIREWAX_CONFIG) ->
 
             return $http.post(BASE_URL + options.url, options.data);
 
-angular.module 'wirewaxStudio'
+angular.module 'app.api'
 .factory 'TokenApi', TokenApi

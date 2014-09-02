@@ -1,14 +1,14 @@
 'use strict';
 
-AuthenticationService = ($http, TokenApi) ->
+AuthenticationService = (UserSession, TokenApi) ->
 
     authenticateUser: (data) ->
         TokenApi.getAccessToken(data)
 
     logout: ->
-        TokenApi.destroy()
+        UserSession.destroy()
         console.log 'logout'
 
 
-angular.module 'wirewaxStudio'
+angular.module 'app.user'
 .service 'AuthenticationService', AuthenticationService

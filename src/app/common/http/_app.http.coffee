@@ -1,3 +1,3 @@
 'use strict';
 
-angular.module 'http.services', []
+angular.module 'app.http', []

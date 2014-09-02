@@ -8,5 +8,5 @@ HttpHeadersService = (UserSession) ->
         req.headers['Authorization'] = 'Bearer ' + UserSession.getAccessToken()
 
 
-angular.module 'http.services'
+angular.module 'app.http'
 .service "HttpHeaders", HttpHeadersService

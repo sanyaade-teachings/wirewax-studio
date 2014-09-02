@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module 'http.services'
-.factory "HttpInterceptor", ($q, $injector, $log, HttpHeaders, UserSession) ->
+
+Intercepetor = ($q, $injector, $log, HttpHeaders, UserSession) ->
     request: (request) ->
         deferred = $q.defer()
         if request.secure is true
@@ -24,3 +24,6 @@ angular.module 'http.services'
         $log.error 'res: ' + response.status, response
 
         response
+
+angular.module 'app.http'
+.factory 'HttpInterceptor', Intercepetor
