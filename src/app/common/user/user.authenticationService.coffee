@@ -9,6 +9,9 @@ AuthenticationService = (UserSession, TokenApi) ->
         UserSession.destroy()
         console.log 'logout'
 
+    isAuthorised: (roles) ->
+
+
 
 angular.module 'app.user'
 .service 'AuthenticationService', AuthenticationService

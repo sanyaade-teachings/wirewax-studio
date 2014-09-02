@@ -1,7 +1,7 @@
 'use strict';
 
 UserRoles =
-    all: '*',
+    all: '*'
     admin: 'admin'
 
 angular.module 'app.constants'

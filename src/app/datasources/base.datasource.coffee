@@ -10,7 +10,7 @@ BaseDataSource = (ApiService) ->
 
             @inError = false
 
-            @initialise()
+#            @initialise()
 
         _createItems: (data) =>
             @collection.push new @model(data)
