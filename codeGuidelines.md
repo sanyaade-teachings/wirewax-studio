@@ -38,42 +38,33 @@
   - **Definitions**: Declare modules using the setter and getter syntax
 
     ```javascript
-    // avoid
-    var app = angular.module('app', []);
-    app.controller();
-    app.factory();
-
-    // use
-    angular
-      .module('app', [])
-      .controller()
-      .factory();
+    # avoid
+    app = angular.module("app", [])
+    app.controller()
+    app.factory()
+    
+    # use
+    angular.module("app", [])
+    .controller()
+    .factory()
     ```  
 
   - **Methods**: Pass functions into module methods rather than assign as a callback
 
     ```javascript
     // avoid
-    angular
-      .module('app', [])
-      .controller('MainCtrl', function MainCtrl () {
-
-      })
-      .service('SomeService', function SomeService () {
-
-      });
-
+    angular.module("app", [])
+    .controller("MainCtrl", MainCtrl = ->
+    
+    ).service "SomeService", SomeService = ->
+    
     // use
-    function MainCtrl () {
-
-    }
-    function SomeService () {
-
-    }
-    angular
-      .module('app', [])
-      .controller('MainCtrl', MainCtrl)
-      .service('SomeService', SomeService);
+    MainCtrl = ->
+    SomeService = ->
+        
+    angular.module("app", [])
+    .controller("MainCtrl", MainCtrl)
+    .service "SomeService", SomeService
     ```
 
   - This aids with readability and reduces the volume of code "wrapped" inside the Angular framework
