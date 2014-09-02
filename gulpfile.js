@@ -204,11 +204,11 @@ gulp.task('lint', ['jshint', 'csslint']);
 /**
  * Test
  */
-gulp.task('test', ['lint', 'coffee-test', 'karma-conf'], function (arg) {
+gulp.task('test', ['lint', 'coffee-test', 'karma-conf'], function () {
     return testFiles()
         .pipe(g.karma({
             configFile: 'karma.conf.js',
-            action: 'run'
+            action: 'watch'
         }));
 });
 
