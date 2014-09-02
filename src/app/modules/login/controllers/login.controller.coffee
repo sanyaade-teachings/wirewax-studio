@@ -1,7 +1,7 @@
 'use strict';
 
 
-LoginController = () ->
+LoginController = ->
 
 angular.module 'login.controllers'
 .controller 'LoginController', LoginController

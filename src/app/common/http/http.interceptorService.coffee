@@ -3,6 +3,8 @@
 
 Intercepetor = ($q, $injector, $log, HttpHeaders, UserSession) ->
     request: (request) ->
+        $log.debug 'req: ' + request.url, request
+
         deferred = $q.defer()
         if request.secure is true
             $q.when(UserSession.isAuthenticated()).then (->
@@ -23,7 +25,7 @@ Intercepetor = ($q, $injector, $log, HttpHeaders, UserSession) ->
     responseError: (response) ->
         $log.error 'res: ' + response.status, response
 
-        response
+        $q.reject response
 
 angular.module 'app.http'
 .factory 'HttpInterceptor', Intercepetor
