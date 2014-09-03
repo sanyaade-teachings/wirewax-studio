@@ -1,13 +1,13 @@
 "use strict"
 
 
-Controller = (AuthenticationService, UserSession)->
+Controller = (UserSession)->
     submit: ->
         data =
             username: this.username
             password: this.password
 
-        promise = AuthenticationService.authenticateUser(data)
+        promise = UserSession.authenticateUser(data)
 
         promise.success((data, status, headers, config) ->
             UserSession.create(data)

@@ -1,6 +1,6 @@
 'use strict';
 
-AuthenticationService = (UserSession, TokenApi) ->
+UserAuthentication = ($cookieStore, TokenApi) ->
     authenticateUser: (data) ->
         TokenApi.getAccessToken(data)
 
@@ -12,7 +12,6 @@ AuthenticationService = (UserSession, TokenApi) ->
             if cookie.expires * 1000 > new Date().getTime()
                 true
             else
-                $log.debug 'token expired'
                 if @_hasRefreshToken(cookie)
                     @_refreshAccessToken()
                 else
@@ -26,7 +25,6 @@ AuthenticationService = (UserSession, TokenApi) ->
     _refreshAccessToken: ->
         promise = TokenApi.refreshAccessToken($cookieStore.get "wirewax")
         promise.success (data) ->
-            $log.debug 'refresh token success ', data
             $cookieStore.put 'wirewax', data
         .error (data) ->
             console.error 'refresh token: ', data
@@ -35,4 +33,4 @@ AuthenticationService = (UserSession, TokenApi) ->
         cookie.refresh_token
 
 angular.module 'app.user'
-.service 'AuthenticationService', AuthenticationService
+.service 'UserAuthentication', UserAuthentication

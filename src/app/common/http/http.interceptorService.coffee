@@ -1,13 +1,13 @@
 'use strict';
 
 
-Intercepetor = ($q, $injector, $log, HttpHeaders, UserSession) ->
+Interceptor = ($q, $log, HttpHeaders, UserAuthentication) ->
     request: (request) ->
         $log.debug 'req: ' + request.url, request
 
         deferred = $q.defer()
         if request.secure is true
-            $q.when(UserSession.isAuthenticated()).then (->
+            $q.when(UserAuthentication.isAuthenticated()).then (->
                 HttpHeaders.set(request)
                 deferred.resolve(request)
                 deferred.promise
@@ -28,4 +28,4 @@ Intercepetor = ($q, $injector, $log, HttpHeaders, UserSession) ->
         $q.reject response
 
 angular.module 'app.http'
-.factory 'HttpInterceptor', Intercepetor
+.factory 'HttpInterceptor', Interceptor
