@@ -45,7 +45,7 @@ describe "UserSessionService", ->
 
         UserSession.create(mockCookie);
 
-        expect(mockCookieService.get('wirewax')).to.deep.equal(mockCookie)
+        assert.deepEqual(mockCookieService.get('wirewax'), mockCookie)
 
     it "should remove the wirewax cookie on UserSession.destroy", () ->
         mockCookie =
@@ -61,4 +61,4 @@ describe "UserSessionService", ->
 
         UserSession.destroy()
 
-        expect(mockCookieService.get('wirewax')).to.be.undefined;
+        assert.isUndefined(mockCookieService.get('wirewax'))
