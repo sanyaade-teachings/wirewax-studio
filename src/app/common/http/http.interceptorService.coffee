@@ -19,12 +19,10 @@ Interceptor = ($q, $log, HttpHeaders, UserAuthentication) ->
 
     response: (response) ->
         $log.debug 'res: ' + response.status, response
-
         response
 
     responseError: (response) ->
         $log.error 'res: ' + response.status, response
-
         $q.reject response
 
 angular.module 'app.http'

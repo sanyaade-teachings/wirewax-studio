@@ -11,6 +11,7 @@ describe "User Authentication Service", ->
     mockCookieService = null;
     TokenApi = null
     $q = null
+    $rootScope = null;
 
     beforeEach module(($provide) ->
 
@@ -32,10 +33,11 @@ describe "User Authentication Service", ->
     )
 
     #    include the class we are testing
-    beforeEach inject((_UserAuthentication_, _TokenApi_, _$q_) ->
+    beforeEach inject((_UserAuthentication_, _TokenApi_, _$q_, _$rootScope_) ->
         UserAuthentication = _UserAuthentication_
         TokenApi = _TokenApi_
         $q = _$q_
+        $rootScope = _$rootScope_
     )
 
     describe "isAuthenticated: token exists and has not expired", ->
@@ -73,14 +75,36 @@ describe "User Authentication Service", ->
                     refresh_token: '2c5gO2S4UUyJFLLInjBDDGpMlZNXvkdxLfmEbfS3'
                     token_type: 'bearer'
 
+                mockNewCookie =
+                    access_token: 'hNGfgizrarjuOj3XoMhOEDc3HIlsg13HUIOY789HO'
+                    expires: Math.ceil((new Date().setYear(3000)) / 1000)
+                    expires_in: 108000
+                    token_type: 'bearer'
+
                 mockCookieService.put('wirewax', mockExpiredCookie);
 
-                deferred = $q.defer();
-                deferred.resolve('resolved');
-                spyOn(TokenApi, 'refreshAccessToken').andReturn(deferred.promise);
-
+                deferred = $q.defer()
+                TokenApi.refreshAccessToken = jasmine.createSpy('refreshAccessToken').andReturn(deferred.promise)
                 UserAuthentication.isAuthenticated()
 
-    describe "isAuthenticated: token does not exist", ->
-        it "should return false", () ->
-            assert.isFalse(UserAuthentication.isAuthenticated());
+                deferred.resolve(mockNewCookie)
+
+                #   Required to resolve promise
+                $rootScope.$digest()
+
+                assert.deepEqual(mockCookieService.get('wirewax'), mockNewCookie)
+
+    describe "getAccessToken", ->
+        it "should return the cookies accessToken", () ->
+            mockCookie =
+                access_token: 'hNGfgizrarjuOj3XoMhOEDc3HIlsg13N3C3AEfXC'
+                expires: Math.ceil((new Date().setYear(3000)) / 1000)
+                expires_in: 108000
+                refresh_token: '2c5gO2S4UUyJFLLInjBDDGpMlZNXvkdxLfmEbfS3'
+                token_type: 'bearer'
+
+            mockCookieService.put('wirewax', mockCookie);
+
+            UserAuthentication.isAuthenticated()
+
+            assert.equal(UserAuthentication.getAccessToken(), mockCookie.access_token, 'Access token should == ' + mockCookie.access_token)
