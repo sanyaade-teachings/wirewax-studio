@@ -107,4 +107,5 @@ describe "User Authentication Service", ->
 
             UserAuthentication.isAuthenticated()
 
-            assert.equal(UserAuthentication.getAccessToken(), mockCookie.access_token, 'Access token should == ' + mockCookie.access_token)
+            assert.equal(UserAuthentication.getAccessToken(), mockCookie.access_token,
+                'Access token should == ' + mockCookie.access_token)

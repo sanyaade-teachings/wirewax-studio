@@ -4,7 +4,7 @@ UserAuthentication = ($cookieStore, TokenApi) ->
     authenticateUser: (data) ->
         TokenApi.getAccessToken(data)
 
-    isAuthorised: (roles) ->
+#    isAuthorised: (roles) ->
 
     isAuthenticated: ->
         cookie = $cookieStore.get("wirewax")
@@ -24,10 +24,15 @@ UserAuthentication = ($cookieStore, TokenApi) ->
 
     _refreshAccessToken: ->
         promise = TokenApi.refreshAccessToken($cookieStore.get "wirewax")
-        promise.success (data) ->
+
+        promise.then ((data)->
             $cookieStore.put 'wirewax', data
-        .error (data) ->
+        ), (data) ->
             console.error 'refresh token: ', data
+#        promise.success (data) ->
+#            $cookieStore.put 'wirewax', data
+#        .error (data) ->
+#            console.error 'refresh token: ', data
 
     _hasRefreshToken: (cookie) ->
         cookie.refresh_token

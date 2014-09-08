@@ -1,23 +1,23 @@
 "use strict"
 
 
-Controller = (UserSession)->
+Controller = (UserAuthentication)->
     submit: ->
         data =
             username: this.username
             password: this.password
 
-        promise = UserSession.authenticateUser(data)
+        promise = UserAuthentication.authenticateUser(data)
 
-        promise.success((data, status, headers, config) ->
+        promise.success((data) ->
             UserSession.create(data)
         )
-        promise.error ((data, status, headers, config) ->
+        promise.error ((data) ->
             alert 'login failed'
         )
 
 LoginForm = ->
-    link = (scope, element, attrs) ->
+    link = () ->
 
     link: link
     restrict: 'E'

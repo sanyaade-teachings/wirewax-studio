@@ -26,4 +26,4 @@ Interceptor = ($q, $log, HttpHeaders, UserAuthentication) ->
         $q.reject response
 
 angular.module 'app.http'
-.factory 'HttpInterceptor', Interceptor
+.factory 'HTTPInterceptor', Interceptor

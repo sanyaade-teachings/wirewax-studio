@@ -29,8 +29,3 @@ angular.module 'wirewaxStudio', [
             controller: 'ProjectsController'
             data =
                 authorised_roles: [USER_ROLES.all]
-
-
-#       Add the HTTP interceptor
-.config ($httpProvider) ->
-    $httpProvider.interceptors.push "HttpInterceptor"
