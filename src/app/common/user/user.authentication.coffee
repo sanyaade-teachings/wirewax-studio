@@ -29,10 +29,6 @@ UserAuthentication = ($cookieStore, TokenApi) ->
             $cookieStore.put 'wirewax', data
         ), (data) ->
             console.error 'refresh token: ', data
-#        promise.success (data) ->
-#            $cookieStore.put 'wirewax', data
-#        .error (data) ->
-#            console.error 'refresh token: ', data
 
     _hasRefreshToken: (cookie) ->
         cookie.refresh_token

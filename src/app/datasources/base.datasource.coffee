@@ -1,24 +1,36 @@
 'use strict';
 
-BaseDataSource = (ApiService) ->
+BaseDataSource = () ->
     class BaseDataSource
         constructor: (options) ->
             @name = options.name
-
             @model = options.model
-            @collection = []
-
+            @initialised = false
             @inError = false
 
-#            @initialise()
+            @collection = []
+
+            @_initialise()
 
         _createItems: (data) =>
-            @collection.push new @model(data)
+            _.each(data, (dataItem) =>
+                @collection.push new @model dataItem
+            )
+            @initialised = true
+            @_hasInitialised()
 
         _error: (data) =>
-            @collection.push new @model()
+            @initialised = true
             @error = true
+            @_hasErrored()
+
             console.error data
+
+        destroy: ->
+            @collection.length = 0
+            @initialised = false;
+            @inError = false;
+
 
 angular.module 'app.dataSources'
 .factory 'BaseDataSource', BaseDataSource

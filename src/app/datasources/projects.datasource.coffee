@@ -7,7 +7,8 @@ ProjectsDataSource = (BaseDataSource) ->
                 arr: ['a', 'b', 'c']
                 name: 'Projects DataSource'
             super(options)
-            console.log 'ProjectsDataSource Init...'
+
+        _initialise: ->
 
     new ProjectsDataSource()
 
