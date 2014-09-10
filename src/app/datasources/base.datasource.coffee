@@ -21,7 +21,7 @@ BaseDataSource = () ->
 
         _error: (data) =>
             @initialised = true
-            @error = true
+            @inError = true
             @_hasErrored()
 
             console.error data

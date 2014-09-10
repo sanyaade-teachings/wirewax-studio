@@ -10,9 +10,9 @@ VideosDataSource = ($rootScope, VideoModel, BaseDataSource, ApiService) ->
             super(options)
 
         _initialise: ->
-            promise = ApiService.getVideoData()
-            promise.success(@_createItems)
-            promise.error(@_error)
+            ApiService.getVideoData()
+                .success(@_createItems)
+                .error(@_error)
 
         _hasInitialised: ->
             $rootScope.$emit 'videoDataSource.loaded'
