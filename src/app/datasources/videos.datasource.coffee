@@ -1,7 +1,7 @@
 'use strict';
 
 VideosDataSource = ($rootScope, VideoModel, BaseDataSource, ApiService) ->
-    class VideosDataSource extends BaseDataSource
+    new class extends BaseDataSource
 
         constructor: ->
             options =
@@ -11,17 +11,14 @@ VideosDataSource = ($rootScope, VideoModel, BaseDataSource, ApiService) ->
 
         _initialise: ->
             ApiService.getVideoData()
-                .success(@_createItems)
-                .error(@_error)
+            .success(@_createItems)
+            .error(@_error)
 
         _hasInitialised: ->
             $rootScope.$emit 'videoDataSource.loaded'
 
         _hasErrored: ->
             $rootScope.$emit 'videoDataSource.error'
-
-
-    new VideosDataSource()
 
 angular.module 'app.dataSources'
 .factory 'VideosDataSource', VideosDataSource

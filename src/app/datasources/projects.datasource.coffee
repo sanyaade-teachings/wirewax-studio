@@ -1,7 +1,7 @@
 'use strict';
 
-ProjectsDataSource = (BaseDataSource) ->
-    class ProjectsDataSource extends BaseDataSource
+ProjectsDataSource = ($rootScope, BaseDataSource) ->
+    new class extends BaseDataSource
         constructor: ->
             options =
                 arr: ['a', 'b', 'c']
@@ -10,7 +10,12 @@ ProjectsDataSource = (BaseDataSource) ->
 
         _initialise: ->
 
-    new ProjectsDataSource()
+        _hasInitialised: ->
+            $rootScope.$emit 'projectsDataSource.loaded'
+
+        _hasErrored: ->
+            $rootScope.$emit 'projectsDataSource.error'
+
 
 angular.module 'app.dataSources'
 .factory 'ProjectsDataSource', ProjectsDataSource
