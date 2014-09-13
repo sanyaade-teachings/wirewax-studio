@@ -8,11 +8,12 @@ describe "User Authentication Service", ->
 
     #    Reference to UserSession so we can access inside the tests
     UserAuthentication = null;
-    mockCookieService = null;
     TokenApi = null
-    $q = null
     $rootScope = null;
     UserSession = null;
+    $q = null;
+
+    mockCookieService = null;
 
     beforeEach module(($provide) ->
 
@@ -28,11 +29,7 @@ describe "User Authentication Service", ->
             remove: (key) ->
                 delete @_cookies[key]
 
-        mockUserSession =
-            destroy: ->
-
         $provide.value "$cookieStore", mockCookieService
-        $provide.value "UserSession", mockUserSession
 
         null #  COFFEE: must return null here, otherwise breaks
     )
@@ -61,6 +58,7 @@ describe "User Authentication Service", ->
 
     describe "isAuthenticated: token exists, has expired and has no refresh token", ->
         it "should return false", () ->
+
             mockCookie =
                 access_token: 'hNGfgizrarjuOj3XoMhOEDc3HIlsg13N3C3AEfXC'
                 expires: Math.ceil((new Date().setYear(1)) / 1000)
@@ -68,9 +66,14 @@ describe "User Authentication Service", ->
                 token_type: 'bearer'
 
             mockCookieService.put('wirewax', mockCookie);
-            auth = UserAuthentication.isAuthenticated()
 
-            assert.isFalse();
+            UserSession.destroy = jasmine.createSpy('destroy')
+
+            UserAuthentication.isAuthenticated()
+
+            assert.equal(UserSession.destroy.callCount, 1, 'Destroy session should have been called once');
+
+
 
     describe "isAuthenticated: token exists, has expired and has a refresh token", ->
         describe "_refreshAccessToken: returns a promise and succeeds", ->

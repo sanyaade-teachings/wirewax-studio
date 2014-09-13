@@ -24,8 +24,6 @@ BaseDataSource = () ->
             @inError = true
             @_hasErrored()
 
-            console.error data
-
         destroy: ->
             @collection.length = 0
             @initialised = false;
