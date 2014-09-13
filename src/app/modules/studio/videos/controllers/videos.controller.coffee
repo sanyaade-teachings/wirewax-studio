@@ -12,12 +12,12 @@ VideosController = ($rootScope, $scope, VideosDataSource, BaseController) ->
 
         _bindEventListeners: ->
             @eventListeners.push(
-                $rootScope.$on('videoDataSource.loaded', ->
-
-                )
-                $rootScope.$on('videoDataSource.error', ->
-
-                )
+              $rootScope.$on('videoDataSource.loaded', ->
+                console.log 'videoDataSource.loaded'
+              )
+              $rootScope.$on('videoDataSource.error', ->
+                console.log 'videoDataSource.error'
+              )
             )
             super()
 

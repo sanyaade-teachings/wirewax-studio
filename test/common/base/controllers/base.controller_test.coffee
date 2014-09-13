@@ -51,9 +51,9 @@ describe "BaseControllerTest", ->
             controller = new BaseController(options)
 
             controller.eventListeners.push(
-                $rootScope.$on('mock.event.subscriber.one'),
-                $rootScope.$on('mock.event.subscriber.two'),
-                $rootScope.$on('mock.event.subscriber.three')
+              $rootScope.$on('mock.event.subscriber.one'),
+              $rootScope.$on('mock.event.subscriber.two'),
+              $rootScope.$on('mock.event.subscriber.three')
             )
 
             $scope.$emit('$destroy')

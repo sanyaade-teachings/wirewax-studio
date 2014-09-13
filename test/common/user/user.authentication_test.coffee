@@ -58,7 +58,6 @@ describe "User Authentication Service", ->
 
     describe "isAuthenticated: token exists, has expired and has no refresh token", ->
         it "should return false", () ->
-
             mockCookie =
                 access_token: 'hNGfgizrarjuOj3XoMhOEDc3HIlsg13N3C3AEfXC'
                 expires: Math.ceil((new Date().setYear(1)) / 1000)
@@ -72,7 +71,6 @@ describe "User Authentication Service", ->
             UserAuthentication.isAuthenticated()
 
             assert.equal(UserSession.destroy.callCount, 1, 'Destroy session should have been called once');
-
 
 
     describe "isAuthenticated: token exists, has expired and has a refresh token", ->
@@ -118,4 +116,4 @@ describe "User Authentication Service", ->
             UserAuthentication.isAuthenticated()
 
             assert.equal(UserAuthentication.getAccessToken(), mockCookie.access_token,
-                'Access token should == ' + mockCookie.access_token)
+                'Access token should === ' + mockCookie.access_token)
