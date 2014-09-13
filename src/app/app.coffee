@@ -9,23 +9,31 @@ angular.module 'wirewaxStudio', [
     $urlRouterProvider.otherwise("/studio");
 
     $stateProvider
-        .state "login",
-            url: '/'
-            templateUrl: 'templates/login/studioLogin.html'
-            controller: 'LoginController'
-            data =
-                authorised_roles: [USER_ROLES.all]
+    .state "login",
+        url: '/'
+        templateUrl: 'templates/login/studioLogin.html'
+        controllerAs: 'LoginCtrl'
+        controller: 'LoginController'
+        data =
+            authorised_roles: [USER_ROLES.all]
 
-        .state "studio",
-            url: '/studio'
-            templateUrl: 'templates/studio/furniture/studioCore.html'
-            controller: 'VideosController'
-            data =
-                authorised_roles: [USER_ROLES.all]
+    .state "studio",
+        url: '/studio'
+        templateUrl: 'templates/studio/furniture/studioCore.html'
+        controllerAs: 'VideoCtrl'
+        controller: 'VideosController'
+        data:
+            authorised_roles: [USER_ROLES.all]
 
-        .state "projects",
-            url: '/projects'
-            templateUrl: 'templates/studio/furniture/studioCore.html'
-            controller: 'ProjectsController'
-            data =
-                authorised_roles: [USER_ROLES.all]
+    .state "studio.videos",
+        templateUrl: 'templates/studio/videos/videosView.html'
+        data:
+            authorised_roles: [USER_ROLES.all]
+
+    .state "projects",
+        url: '/projects'
+        templateUrl: 'templates/studio/furniture/studioCore.html'
+        controllerAs: 'ProjectsCtrl'
+        controller: 'ProjectsController'
+        data =
+            authorised_roles: [USER_ROLES.all]

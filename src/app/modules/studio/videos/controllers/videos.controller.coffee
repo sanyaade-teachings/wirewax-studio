@@ -1,22 +1,25 @@
 'use strict';
 
 
-VideosController = ($rootScope, $scope, VideosDataSource, BaseController) ->
+VideosController = ($rootScope, $scope, $state, VideosDataSource, BaseController) ->
     new class VideosController extends BaseController
 
         constructor: ->
             options =
-                $scope: $scope
+                $scope_dep: $scope
+                $state_dep: $state
                 name: 'VIDEOS_CONTROLLER'
+                route_state: 'studio.videos'
             super(options)
+
 
         _bindEventListeners: ->
             @eventListeners.push(
               $rootScope.$on('videoDataSource.loaded', ->
-                console.log 'videoDataSource.loaded'
+                  console.log 'videoDataSource.loaded'
               )
               $rootScope.$on('videoDataSource.error', ->
-                console.log 'videoDataSource.error'
+                  console.log 'videoDataSource.error'
               )
             )
             super()
