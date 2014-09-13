@@ -1,15 +1,26 @@
 'use strict';
 
 
-VideosController = ($scope, VideosDataSource) ->
+VideosController = ($rootScope, $scope, VideosDataSource, BaseController) ->
+    new class VideosController extends BaseController
 
-    eventListeners = []
+        constructor: ->
+            options =
+                $scope: $scope
+                name: 'VIDEOS_CONTROLLER'
+            super(options)
 
-    $scope.$on('$destroy', ->
-        _.each(eventListeners, (event) ->
-            event()
-        )
-    )
+        _bindEventListeners: ->
+            @eventListeners.push(
+                $rootScope.$on('videoDataSource.loaded', ->
+
+                )
+                $rootScope.$on('videoDataSource.error', ->
+
+                )
+            )
+            super()
 
 angular.module 'videos.controllers'
 .controller 'VideosController', VideosController
+

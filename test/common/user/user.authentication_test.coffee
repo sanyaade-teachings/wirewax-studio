@@ -12,6 +12,7 @@ describe "User Authentication Service", ->
     TokenApi = null
     $q = null
     $rootScope = null;
+    UserSession = null;
 
     beforeEach module(($provide) ->
 
@@ -27,17 +28,22 @@ describe "User Authentication Service", ->
             remove: (key) ->
                 delete @_cookies[key]
 
+        mockUserSession =
+            destroy: ->
+
         $provide.value "$cookieStore", mockCookieService
+        $provide.value "UserSession", mockUserSession
 
         null #  COFFEE: must return null here, otherwise breaks
     )
 
     #    include the class we are testing
-    beforeEach inject((_UserAuthentication_, _TokenApi_, _$q_, _$rootScope_) ->
+    beforeEach inject((_UserAuthentication_, _TokenApi_, _$q_, _$rootScope_, _UserSession_) ->
         UserAuthentication = _UserAuthentication_
         TokenApi = _TokenApi_
         $q = _$q_
         $rootScope = _$rootScope_
+        UserSession = _UserSession_
     )
 
     describe "isAuthenticated: token exists and has not expired", ->
@@ -62,8 +68,9 @@ describe "User Authentication Service", ->
                 token_type: 'bearer'
 
             mockCookieService.put('wirewax', mockCookie);
+            auth = UserAuthentication.isAuthenticated()
 
-            assert.isFalse(UserAuthentication.isAuthenticated());
+            assert.isFalse();
 
     describe "isAuthenticated: token exists, has expired and has a refresh token", ->
         describe "_refreshAccessToken: returns a promise and succeeds", ->

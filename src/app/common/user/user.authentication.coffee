@@ -1,12 +1,13 @@
 'use strict';
 
-UserAuthentication = ($cookieStore, TokenApi) ->
+UserAuthentication = ($q, $cookieStore, UserSession, TokenApi) ->
     authenticateUser: (data) ->
         TokenApi.getAccessToken(data)
 
 #    isAuthorised: (roles) ->
 
     isAuthenticated: ->
+        deferred = $q.defer()
         cookie = $cookieStore.get("wirewax")
         if cookie
             if cookie.expires * 1000 > new Date().getTime()
@@ -15,9 +16,16 @@ UserAuthentication = ($cookieStore, TokenApi) ->
                 if @_hasRefreshToken(cookie)
                     @_refreshAccessToken()
                 else
-                    false
+                    UserSession.destroy()
+
+                    deferred.reject()
+                    deferred.promise
         else
-            false
+            UserSession.destroy()
+
+            deferred.reject()
+            deferred.promise
+
 
     getAccessToken: ->
         $cookieStore.get("wirewax").access_token

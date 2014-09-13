@@ -21,7 +21,7 @@ describe "VideosDataSource", ->
     #   include the module we are testing
     beforeEach module('app.core')
 
-    beforeEach inject((_$rootScope_,_$httpBackend_, _VideosDataSource_, _UserAuthentication_, _VideoModel_) ->
+    beforeEach inject((_$rootScope_, _$httpBackend_, _VideosDataSource_, _UserAuthentication_, _VideoModel_) ->
         VideosDataSource = _VideosDataSource_
         $httpBackend = _$httpBackend_
         UserAuthentication = _UserAuthentication_
@@ -31,8 +31,7 @@ describe "VideosDataSource", ->
 
 
     describe "Initialise: success", ->
-        it "should call _createItems and populate the collection",  ->
-
+        it "should call _createItems and populate the collection", ->
             $httpBackend.whenGET('http://api.wirewax.com/api/videos')
             .respond 200, mockVideoData
 
@@ -42,11 +41,12 @@ describe "VideosDataSource", ->
             # Trigger the mock HTTP request
             $httpBackend.flush()
 
-            assert.equal(VideosDataSource.collection.length, mockVideoData.length, 'Videos Data Source collection length should equal mock data length')
-            assert.instanceOf(VideosDataSource.collection[0], VideoModel, 'Videos Data Source model to be an instance of VideoModel')
+            assert.equal(VideosDataSource.collection.length, mockVideoData.length,
+              'Videos Data Source collection length should equal mock data length')
+            assert.instanceOf(VideosDataSource.collection[0], VideoModel,
+              'Videos Data Source model to be an instance of VideoModel')
 
-        it "should set initialised flag true and emit 'videoDataSource.loaded' event",  ->
-
+        it "should set initialised flag true and emit 'videoDataSource.loaded' event", ->
             $httpBackend.whenGET('http://api.wirewax.com/api/videos')
             .respond 200, mockVideoData
 
@@ -59,11 +59,11 @@ describe "VideosDataSource", ->
             $httpBackend.flush()
 
             assert.isTrue(VideosDataSource.initialised, 'VideosDataSource.initialised property should be true ')
-            assert.equal(emitSpy.argsForCall[0], 'videoDataSource.loaded', 'videoDataSource.loaded event should have been called')
+            assert.equal(emitSpy.argsForCall[0], 'videoDataSource.loaded',
+              'videoDataSource.loaded event should have been called')
 
     describe "Initialise: Error", ->
-        it "should call set inError and initialised true and emit 'videoDataSource.error' event",  ->
-
+        it "should call set inError and initialised true and emit 'videoDataSource.error' event", ->
             $httpBackend.whenGET('http://api.wirewax.com/api/videos')
             .respond 400, mockVideoData
 
@@ -77,6 +77,7 @@ describe "VideosDataSource", ->
 
             assert.isTrue(VideosDataSource.inError, 'VideosDataSource.inError should be true')
             assert.isTrue(VideosDataSource.initialised, 'VideosDataSource.initialised should be true')
-            assert.equal(emitSpy.argsForCall[0], 'videoDataSource.error', 'videoDataSource.error event should have been called')
+            assert.equal(emitSpy.argsForCall[0], 'videoDataSource.error',
+              'videoDataSource.error event should have been called')
 
 
