@@ -3,8 +3,6 @@
 BaseController = () ->
     class BaseController
 
-        @property = 'hello'
-
         constructor: (options) ->
             @$scope = options.$scope
             @name = options.name;
@@ -16,11 +14,11 @@ BaseController = () ->
 
         _bindEventListeners: ->
             @$scope.$on('$destroy', =>
-              _.each(@eventListeners, (event) ->
-                  event()
-              )
+                _.each(@eventListeners, (event) ->
+                    event()
+                )
+                @eventListeners.length = 0
             )
-
 
 angular.module 'app.bases'
 .factory 'BaseController', BaseController
