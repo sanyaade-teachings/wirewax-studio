@@ -20,7 +20,7 @@ angular.module 'wirewaxStudio', [
     .state "studio",
         url: '/studio'
         templateUrl: 'templates/studio/furniture/studioCore.html'
-        controllerAs: 'VideoCtrl'
+        controllerAs: 'VideosCtrl'
         controller: 'VideosController'
         data:
             authorised_roles: [USER_ROLES.all]

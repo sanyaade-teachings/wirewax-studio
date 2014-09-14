@@ -4,7 +4,8 @@
 VideoCard = ->
     restrict: 'E'
     templateUrl: 'templates/common/cards/coreCard.html'
-    link: ->
+    link: (scope, element, attrs) ->
+        console.log scope.video
     controllerAs: 'VideoCard'
     controller: ->
 

@@ -9,23 +9,25 @@ describe "BaseControllerTest", ->
     BaseController = null
     $rootScope = null
     $scope = null
+    $state = null
 
     #    include the class we are testing
-    beforeEach inject((_BaseController_, _$rootScope_) ->
+    beforeEach inject((_BaseController_, _$rootScope_, _$state_) ->
         BaseController = _BaseController_
         $rootScope = _$rootScope_
         $scope = _$rootScope_.$new()
+        $state = _$state_
     )
 
     describe 'Constructor: ', ->
         it "should instantiate with properties: $scope, name and eventListener", () ->
             options =
-                $scope: $scope
+                $scope_dep: $scope
                 name: 'BASE_CONTROLLER'
 
             controller = new BaseController(options)
 
-            assert.equal(controller.$scope, options.$scope)
+            assert.equal(controller.$scope_dep, options.$scope)
             assert.equal(controller.name, options.name)
             assert.lengthOf(controller.eventListeners, 0)
 

@@ -10,6 +10,10 @@ VideosController = ($rootScope, $scope, $state, VideosDataSource, BaseController
                 $state_dep: $state
                 name: 'VIDEOS_CONTROLLER'
                 route_state: 'studio.videos'
+
+            @collection = VideosDataSource.collection
+
+
             super(options)
 
 
