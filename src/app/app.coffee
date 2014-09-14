@@ -31,9 +31,14 @@ angular.module 'wirewaxStudio', [
             authorised_roles: [USER_ROLES.all]
 
     .state "projects",
-        url: '/projects'
+        url: 'studio/projects'
         templateUrl: 'templates/studio/furniture/studioCore.html'
         controllerAs: 'ProjectsCtrl'
         controller: 'ProjectsController'
         data =
+            authorised_roles: [USER_ROLES.all]
+
+    .state "studio.projects",
+        templateUrl: 'templates/studio/videos/videosView.html'
+        data:
             authorised_roles: [USER_ROLES.all]

@@ -1,6 +1,5 @@
 'use strict';
 
-
 VideoCard = ->
     restrict: 'E'
     templateUrl: 'templates/common/cards/coreCard.html'

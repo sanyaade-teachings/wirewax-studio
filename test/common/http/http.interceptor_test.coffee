@@ -9,6 +9,7 @@ describe "HTTPInterceptor", ->
 
         null
     )
+
     #    Reference to UserSession so we can access inside the tests
     HTTPInterceptor = null
     UserAuthentication = null
