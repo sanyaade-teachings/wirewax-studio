@@ -3,7 +3,7 @@
 describe "BaseControllerTest", ->
 
 #     include the module we are testing
-    beforeEach module('app.bases')
+    beforeEach module('app.core')
 
     #    Reference to UserSession so we can access inside the tests
     BaseController = null
@@ -23,6 +23,7 @@ describe "BaseControllerTest", ->
         it "should instantiate with properties: $scope, name and eventListener", () ->
             options =
                 $scope_dep: $scope
+                $state_dep: $state
                 name: 'BASE_CONTROLLER'
 
             controller = new BaseController(options)
@@ -34,7 +35,7 @@ describe "BaseControllerTest", ->
     describe '_bindEventListners: ', ->
         it "should bind to $scope destroy", () ->
             options =
-                $scope: $scope
+                $scope_dep: $scope
                 name: 'BASE_CONTROLLER'
 
             $scope.$on = jasmine.createSpy('$on')
@@ -47,7 +48,7 @@ describe "BaseControllerTest", ->
     describe '$scope.$destroy event: ', ->
         it "should remove all listeners in the eventListener array and $$listeners", () ->
             options =
-                $scope: $scope
+                $scope_dep: $scope
                 name: 'BASE_CONTROLLER'
 
             controller = new BaseController(options)

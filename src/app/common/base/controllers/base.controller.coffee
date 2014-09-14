@@ -25,7 +25,8 @@ BaseController = () ->
             )
 
         _navigateToState: ->
-            @$state.transitionTo(@route_state);
+            if @route_state
+                @$state.transitionTo(@route_state);
 
 
 angular.module 'app.bases'
